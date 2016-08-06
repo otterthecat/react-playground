@@ -16,12 +16,29 @@
     <!-- <script type="text/babel" src="scripts/example.js"></script> -->
     <script type="text/babel">
       var MyText = React.createClass({
-        getContent: function () {
-          return "This is my content!"
+        getInitialState: function () {
+          return {'phrase': ''}
         },
+
+        componentDidMount: function () {
+          this.phraseIndex = 0;
+          this.interval = setInterval(this.startTypewriter, 50);
+        },
+
+        startTypewriter: function () {
+          if (this.phraseIndex > this.props.content.length) {
+            clearInterval(this.interval);
+            this.setState({'phrase': this.props.content});
+          }
+          else {
+            this.setState({'phrase': this.props.content.substr(0, this.phraseIndex) + "_"});
+            this.phraseIndex += 1;
+          }
+        },
+
         render: function () {
           return (
-            <span>{this.getContent()}</span>
+            <span>{this.state.phrase}</span>
           )
         }
       });

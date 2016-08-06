@@ -15,6 +15,12 @@
     <div id="content"></div>
     <!-- <script type="text/babel" src="scripts/example.js"></script> -->
     <script type="text/babel">
+      var phrases = [
+        'Random Phrase number 1.',
+        'Second Phrase of randomness.',
+        'Last and least random phrase.'
+      ];
+
       var MyText = React.createClass({
         getInitialState: function () {
           return {'phrase': ''}
@@ -44,7 +50,7 @@
       });
 
       ReactDOM.render(
-        <MyText content="Fubar Rubarb!" />,
+        <MyText content={phrases[Math.floor(Math.random() * phrases.length)]} />,
         document.getElementById('content')
       );
     </script>
